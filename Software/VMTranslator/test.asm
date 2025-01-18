@@ -5,7 +5,6 @@ A=M
 M=D
 @SP
 M=M+1
-(Increment$ret.0)
 @Increment$ret.0
 D=A
 @SP
@@ -57,6 +56,7 @@ D=M
 M=D
 @Increment
 0;JMP
+(Increment$ret.0)
 @TEMP
 D=M
 @0
@@ -95,19 +95,21 @@ AM=M-1
 D=M
 @SP
 AM=M-1
+M=D+M
 @SP
 M=M+1
 @LCL
 D=M
-@TEMP
+@R5
 M=D
 @5
 D=A
-@TEMP
+@R5
 D=M-D
 A=A+1
 M=D
 @SP
+M=M-1
 A=M
 D=M
 @ARG
@@ -116,7 +118,7 @@ M=D
 D=A
 @SP
 M=D+1
-@TEMP
+@R5
 D=M-1
 @THAT
 M=D
@@ -129,6 +131,7 @@ M=D
 D=D-1
 @LCL
 M=D
-@TEMP
+@R5
 A=A+1
+A=M
 0;JMP

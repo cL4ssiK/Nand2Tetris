@@ -19,6 +19,8 @@ def main():
 
     while parser.has_more_lines():
         parser.advance()
+        if parser.current_instruction[0] == '/':
+            continue
         type = parser.command_type()
         command = parser.arg1()
         addr = parser.arg2()

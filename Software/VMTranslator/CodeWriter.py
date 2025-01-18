@@ -86,7 +86,6 @@ class CodeWriter:
 
     def write_call(self, function_name, n_args):
         label = function_name + '$ret.' + str(self.unique_label)
-        self.write_label(label) # Create label for return address
         self.out.write('@' + label + '\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n') # Push return address to the stack
         self.write_push_pop('C_PUSH', 'LCL', 0)
         self.write_push_pop('C_PUSH', 'ARG', 0)
@@ -95,19 +94,20 @@ class CodeWriter:
         self.out.write('@SP\nD=M\n@' + str(5 + int(n_args)) + '\nD=D-A\n@ARG\nM=D\n') # Repositioning ARG
         self.out.write('@SP\nD=M\n@LCL\nM=D\n') # Reposition LCL
         self.write_goto(function_name) # Go to label
+        self.write_label(label) # Create label for return address
         self.unique_label += 1
         
 
-    def write_return(self):
-        self.out.write('@LCL\nD=M\n@TEMP\nM=D\n') # endFrame = LCL
-        self.out.write('@5\nD=A\n@TEMP\nD=M-D\nA=A+1\nM=D\n') # retAdd r = *(endFrame - 5)
-        self.out.write('@SP\nA=M\nD=M\n@ARG\nA=M\nM=D\n') # *ARG = pop()
+    def write_return(self): 
+        self.out.write('@LCL\nD=M\n@R5\nM=D\n') # endFrame = LCL
+        self.out.write('@5\nD=A\n@R5\nD=M-D\nA=A+1\nM=D\n') # retAdd r = *(endFrame - 5)
+        self.out.write('@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n') # *ARG = pop()
         self.out.write('D=A\n@SP\nM=D+1\n') # SP = ARG + 1
-        self.out.write('@TEMP\nD=M-1\n@THAT\nM=D\n') # THAT = *(endFrame - 1)
+        self.out.write('@R5\nD=M-1\n@THAT\nM=D\n') # THAT = *(endFrame - 1)
         self.out.write('D=D-1\n@THIS\nM=D\n') # THIS = *(endFrame - 2)
         self.out.write('D=D-1\n@ARG\nM=D\n') # ARG = *(endFrame - 3)
         self.out.write('D=D-1\n@LCL\nM=D\n') # LCL = *(endFrame - 4)
-        self.out.write('@TEMP\nA=A+1\n0;JMP\n') # goto retAddr
+        self.out.write('@R5\nA=A+1\nA=M\n0;JMP\n') # goto retAddr
 
 
 
