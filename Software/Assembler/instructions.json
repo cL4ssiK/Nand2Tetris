@@ -1,0 +1,55 @@
+{
+    "dest": [
+        {"instruction": "None", "binary": "000"},
+        {"instruction": "M", "binary": "001"},
+        {"instruction": "D", "binary": "010"},
+        {"instruction": "DM", "binary": "011"},
+        {"instruction": "A", "binary": "100"},
+        {"instruction": "AM", "binary": "101"},
+        {"instruction": "AD", "binary": "110"},
+        {"instruction": "ADM", "binary": "111"}
+    ],
+    
+    "comp": [
+        {"instruction": "0", "binary": "0101010"},
+        {"instruction": "1", "binary": "1111111"},
+        {"instruction": "-1", "binary": "1111010"},
+        {"instruction": "D", "binary": "0001100"},
+        {"instruction": "A", "binary": "0110000"},
+        {"instruction": "M", "binary": "1110000"},
+        {"instruction": "!D", "binary": "0001101"},
+        {"instruction": "!A", "binary": "0110001"},
+        {"instruction": "!M", "binary": "1110001"},
+        {"instruction": "-D", "binary": "0001111"},
+        {"instruction": "-A", "binary": "0110011"},
+        {"instruction": "-M", "binary": "1110011"},
+        {"instruction": "D+1", "binary": "0011111"},
+        {"instruction": "A+1", "binary": "0110111"},
+        {"instruction": "M+1", "binary": "1110111"},
+        {"instruction": "D-1", "binary": "0001110"},
+        {"instruction": "A-1", "binary": "0110010"},
+        {"instruction": "M-1", "binary": "1110010"},
+        {"instruction": "D+A", "binary": "0000010"},
+        {"instruction": "D+M", "binary": "1000010"},
+        {"instruction": "D-A", "binary": "0010011"},
+        {"instruction": "D-M", "binary": "1010011"},
+        {"instruction": "A-D", "binary": "0000111"},
+        {"instruction": "M-D", "binary": "1000111"},
+        {"instruction": "D&A", "binary": "0000000"},
+        {"instruction": "D&M", "binary": "1000000"},
+        {"instruction": "D|A", "binary": "0010101"},
+        {"instruction": "D|M", "binary": "1010101"}
+    ],
+
+    "jump": [
+        {"instruction": "None", "binary": "000"},
+        {"instruction": "JGT", "binary": "001"},
+        {"instruction": "JEQ", "binary": "010"},
+        {"instruction": "JGE", "binary": "011"},
+        {"instruction": "JLT", "binary": "100"},
+        {"instruction": "JNE", "binary": "101"},
+        {"instruction": "JLE", "binary": "110"},
+        {"instruction": "JMP", "binary": "111"}
+    ]
+
+}

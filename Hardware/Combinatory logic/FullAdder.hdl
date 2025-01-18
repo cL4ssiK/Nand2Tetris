@@ -1,0 +1,12 @@
+// kupialnx
+
+CHIP FullAdder {
+    IN a, b, c;  // 1-bit inputs
+    OUT sum,     // Right bit of a + b + c
+        carry;   // Left bit of a + b + c
+
+    PARTS:
+        HalfAdder(a=a , b=b , sum=aOrB , carry=aPlsB );
+        HalfAdder(a=aOrB , b=c , sum=sum , carry=cPlsAPlsB );
+        Or(a=aPlsB , b=cPlsAPlsB , out=carry );
+}

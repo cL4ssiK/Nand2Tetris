@@ -1,0 +1,38 @@
+// kupialnx
+
+CHIP ALU {
+    IN  
+        x[16], y[16],  // 16-bit inputs        
+        zx, // zero the x input?
+        nx, // negate the x input?
+        zy, // zero the y input?
+        ny, // negate the y input?
+        f,  // compute (out = x + y) or (out = x & y)?
+        no; // negate the out output?
+    OUT 
+        out[16], // 16-bit output
+        zr,      // if (out == 0) equals 1, else 0
+        ng;      // if (out < 0)  equals 1, else 0
+
+    PARTS:
+        Not16(in=x , out=notX );
+        Mux4Way16(a=x , b=notX , c=false , d=true , sel[0]=nx, sel[1]=zx , out=xout );
+
+        Not16(in=y , out=notY );
+        Mux4Way16(a=y , b=notY , c=false , d=true , sel[0]=ny, sel[1]=zy , out=yout );
+
+        Add16(a=xout , b=yout , out=xPlusY );
+        And16(a=xout , b=yout , out=xAndY );
+
+        Mux16(a=xAndY , b=xPlusY , sel=f , out=AndOrPlus );
+        Not16(in=AndOrPlus , out=NotAndOrPlus );
+        Mux16(a=AndOrPlus , b=NotAndOrPlus , sel=no , out=out, out=internalOut, out[15]=ng ); // Return the most left bit to check if out<0.
+        //Mux16(a=AndOrPlus , b=NotAndOrPlus , sel=no , out=out, out[0..7]=internalOut1, out[8..15]=internalOut2, out[15]=ng ); // Comment line 55 and uncomment this for web IDE.
+        
+        //If output is 0 Or16Way gives 0, so negate it.
+        Or16Way(in=internalOut, out=zeroOrnot); //For web IDE comment this line and uncomment lines 60-62.
+        //Or8Way(in=internalOut1 , out=alku );
+        //Or8Way(in=internalOut2 , out=loppu );
+        //Or(a=alku , b=loppu , out=zeroOrnot );
+        Not(in=zeroOrnot, out=zr);    
+}

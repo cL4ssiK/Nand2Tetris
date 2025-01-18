@@ -1,0 +1,11 @@
+// kupialnx
+
+CHIP Xnor {
+  IN a, b;
+  OUT out;
+  PARTS:
+    Nand(a=a ,b=b ,out=out1 );
+	Nand(a=a ,b=out1 ,out=out2 );
+	Nand(a=b ,b=out1 ,out=out3 );
+	And(a=out2 ,b=out3 ,out=out );
+}

@@ -1,0 +1,8 @@
+push constant 42       // Argument to pass (e.g., 42)
+call Increment 1       // Call Increment with 1 argument
+pop temp 0     
+function Increment 0  // Increment function with 0 local variables
+push argument 0       // Push the first argument (ARG[0]) onto the stack
+push constant 1       // Push the constant 1 onto the stack
+add                   // Add the two values
+return

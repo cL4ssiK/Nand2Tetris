@@ -1,0 +1,74 @@
+[
+	{
+		"symbol": "R0",
+		"value": 0
+	},
+	{
+		"symbol": "R1",
+		"value": 1
+	},
+	{
+		"symbol": "R2",
+		"value": 2
+	},
+	{
+		"symbol": "R3",
+		"value": 3
+	},
+	{
+		"symbol": "R4",
+		"value": 4
+	},
+	{
+		"symbol": "R5",
+		"value": 5
+	},
+	{
+		"symbol": "R6",
+		"value": 6
+	},
+	{
+		"symbol": "R7",
+		"value": 7
+	},
+	{
+		"symbol": "R8",
+		"value": 8
+	},
+	{
+		"symbol": "R9",
+		"value": 9
+	},
+	{
+		"symbol": "R10",
+		"value": 10
+	},
+	{
+		"symbol": "R11",
+		"value": 11
+	},
+	{
+		"symbol": "R12",
+		"value": 12
+	},
+	{
+		"symbol": "R13",
+		"value": 13
+	},
+	{
+		"symbol": "R14",
+		"value": 14
+	},
+	{
+		"symbol": "R15",
+		"value": 15
+	},
+	{
+		"symbol": "SCREEN",
+		"value": 16384
+	},
+	{
+		"symbol": "KBD",
+		"value": 24576
+	}
+]

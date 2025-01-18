@@ -1,0 +1,24 @@
+// kupialnx
+
+CHIP Add16 {
+    IN a[16], b[16];
+    OUT out[16];
+
+    PARTS:
+        FullAdder(a=a[0] , b=b[0] , c=false , sum=out[0] , carry=a0PlusB0 );
+        FullAdder(a=a[1] , b=b[1] , c=a0PlusB0 , sum=out[1] , carry=a1PlusB1 );
+        FullAdder(a=a[2] , b=b[2] , c=a1PlusB1 , sum=out[2] , carry=a2PlusB2 );
+        FullAdder(a=a[3] , b=b[3] , c=a2PlusB2 , sum=out[3] , carry=a3PlusB3 );
+        FullAdder(a=a[4] , b=b[4] , c=a3PlusB3 , sum=out[4] , carry=a4PlusB4 );
+        FullAdder(a=a[5] , b=b[5] , c=a4PlusB4 , sum=out[5] , carry=a5PlusB5 );
+        FullAdder(a=a[6] , b=b[6] , c=a5PlusB5 , sum=out[6] , carry=a6PlusB6 );
+        FullAdder(a=a[7] , b=b[7] , c=a6PlusB6 , sum=out[7] , carry=a7PlusB7 );
+        FullAdder(a=a[8] , b=b[8] , c=a7PlusB7 , sum=out[8] , carry=a8PlusB8 );
+        FullAdder(a=a[9] , b=b[9] , c=a8PlusB8 , sum=out[9] , carry=a9PlusB9 );
+        FullAdder(a=a[10] , b=b[10] , c=a9PlusB9 , sum=out[10] , carry=a10PlusB10 );
+        FullAdder(a=a[11] , b=b[11] , c=a10PlusB10 , sum=out[11] , carry=a11PlusB11 );
+        FullAdder(a=a[12] , b=b[12] , c=a11PlusB11 , sum=out[12] , carry=a12PlusB12 );
+        FullAdder(a=a[13] , b=b[13] , c=a12PlusB12 , sum=out[13] , carry=a13PlusB13 );
+        FullAdder(a=a[14] , b=b[14] , c=a13PlusB13 , sum=out[14] , carry=a14PlusB14 );
+        FullAdder(a=a[15] , b=b[15] , c=a14PlusB14 , sum=out[15] , carry=a15PlusB15 );
+}

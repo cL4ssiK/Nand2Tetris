@@ -1,0 +1,12 @@
+// kupialnx
+
+CHIP Or16Way {
+    IN in[16];
+    OUT out;
+
+    PARTS:
+        Or8Way(in=in[0..7] , out=alku );
+        Or8Way(in=in[8..15] , out=loppu );
+        Or(a=alku , b=loppu , out=out );
+      
+}

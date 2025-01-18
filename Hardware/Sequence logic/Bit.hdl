@@ -1,0 +1,10 @@
+// kupialnx
+
+CHIP Bit {
+	IN: in, load;
+	OUT: out;
+		
+	PARTS:
+	  DFF(in=muxOut , out=out, out=muxA );
+      Mux(a=muxA , b=in , sel=load , out=muxOut );
+}

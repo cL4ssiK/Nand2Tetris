@@ -1,0 +1,13 @@
+// kupialnx
+
+CHIP PC {
+    IN in[16], reset, load, inc;
+    OUT out[16];
+    
+    PARTS:
+      Inc16(in=memoryAddress , out=memoryAddressPLUS1 );
+      Mux16(a=memoryAddress , b=memoryAddressPLUS1 , sel=inc , out=repeatOrMove );
+      Mux16(a=repeatOrMove , b=in , sel=load , out=loadOrInc );
+      Mux16(a=loadOrInc , b=false , sel=reset , out=resetOrNot );
+      Register(in=resetOrNot , load=true , out=out, out=memoryAddress );
+}

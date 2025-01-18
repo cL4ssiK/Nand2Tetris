@@ -1,0 +1,14 @@
+[
+    {"segment": "local", "address": "LCL"},
+    {"segment": "argument", "address": "ARG"},
+    {"segment": "this", "address": "THIS"},
+    {"segment": "that", "address": "THAT"},
+    {"segment": "static", "address": "STATIC"},
+    {"segment": "temp", "address": "TEMP"},
+    {"segment": "pointer", "address": "THIS"},
+    {"segment": "LCL", "address": "R1"},
+    {"segment": "ARG", "address": "R2"},
+    {"segment": "THIS", "address": "R3"},
+    {"segment": "THAT", "address": "R4"}
+
+]

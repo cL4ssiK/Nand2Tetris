@@ -1,0 +1,55 @@
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write to M? 
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+    PARTS:
+
+    // instruction is divided like this: ixxaccccccdddjjj
+	
+    //Mux that decides if instruction or outM is loaded
+    Not(in=instruction[15] , out=negI ); //Negate the control bit because 0 == A-instruction.
+    And(a=instruction[15] , b=instruction[5] , out=CInstrWriteAReg );//If most significant control bit is 1 with C instruction write to A-reg
+    Or(a=negI , b=CInstrWriteAReg , out=selARegWrite );
+    Mux16(a=ALUout , b=instruction , sel=negI , out=toAregister );
+    ARegister(in=toAregister , load=selARegWrite , out=aRegister );
+
+    //Cheating outputs
+    Or16(a=false, b=aRegister, out[0..14]=addressM);
+    And16(a=ALUout , b=ALUout , out=outM );
+
+    //Mux that decides does input come from memory input (M-register) or from A-register
+    And(a=instruction[15] , b=instruction[12] , out=control );
+    Mux16(a=aRegister , b=inM , sel=control , out=aRegOrMReg );
+    ALU(x=dRegister , y=aRegOrMReg , zx=instruction[11] , nx=instruction[10] , zy=instruction[9] , ny=instruction[8] , f=instruction[7] , no=instruction[6] , out=ALUout , zr=zr , ng=ng );
+    // if instruction is C and d[1]==1 write to d-register
+    And(a=instruction[15] , b=instruction[4] , out=writeDReg );
+    DRegister(in=ALUout , load=writeDReg , out=dRegister );
+
+    // if instruction is C, decide if write output to memory or not
+    And(a=instruction[15] , b=instruction[3] , out=writeM );
+
+    //PC logic begins here.
+
+    Or(a=zr , b=ng , out=zeroOrNeg );
+    Not(in=zeroOrNeg , out=positive );
+    And(a=instruction[0] , b=positive , out=jgt );
+    And(a=instruction[2] , b=ng , out=jlt );
+    And(a=instruction[1] , b=zr , out=jeq );
+    Or(a=jlt , b=jeq , out=jle );
+    Or(a=jle , b=jgt , out=readAReg );
+
+    And(a=instruction[15] , b=readAReg , out=jump );
+    Not(in=jump , out=increment );
+
+    PC(in=aRegister , load=jump , inc=increment , reset=reset , out[0..14]=pc );
+       
+}
