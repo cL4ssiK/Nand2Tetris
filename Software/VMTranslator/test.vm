@@ -1,8 +1,8 @@
 push constant 42       // Argument to pass (e.g., 42)
-call Increment 1       // Call Increment with 1 argument
+call test.Increment 1       // Call Increment with 1 argument
 // this is a comment
     pop temp 0     
-function Increment 0  // Increment function with 0 local variables
+function test.Increment 0  // Increment function with 0 local variables
 push argument 0       // Push the first argument (ARG[0]) onto the stack
 push constant 1       // Push the constant 1 onto the stack
 add // comment after 1 liner

@@ -3,8 +3,7 @@ import os
 from Parser import Parser
 from CodeWriter import CodeWriter
 
-#TODO: Add file name into labels! like filename.function_name.
-#TODO: Static variables!!
+#TODO: Static variables might be wrong, idk.
 class VMTranslator:
 
     def __init__(self, folder_name):
@@ -16,6 +15,7 @@ class VMTranslator:
 
     def translate_file(self, file_name):
         parser = Parser(file_name, 'config.json')
+        self.cw.update_filename(file_name)
 
         while parser.has_more_lines():
             parser.advance()
@@ -83,7 +83,8 @@ class VMTranslator:
 def main():
     
     #args = sys.argv
-    args = ['testFolderTranslation']
+    #args = ['testFolderTranslation']
+    args = ['test.vm']
     if len(args) != 1:
         print("Invalid amount of arguments!")
         sys.exit(1)

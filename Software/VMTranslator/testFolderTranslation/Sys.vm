@@ -1,2 +1,2 @@
-function Init 0
-call Main 0
+function Sys.Init 0
+call file2.Main 0
