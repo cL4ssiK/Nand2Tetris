@@ -121,6 +121,11 @@ class CodeWriter:
             for item in temp:
                     self.segment_table[item['segment']] = item['address']
 
+    # Initialize stack pointer and jump to sys.init function.
+    def write_bootstrap(self):
+        self.out.write('@256\nD=A\n@SP\nM=D\n') 
+        self.write_goto('sys.init')
+
 
 cw = CodeWriter('opf.asm')
 cw.config('configWriter.json')

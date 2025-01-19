@@ -53,7 +53,9 @@ class VMTranslator:
 
         parser.close()
 
+    #TODO: Find sys.vm and translate it first.
     def translate_folder(self, folder_name):
+        self.cw.write_bootstrap()
         for filename in os.listdir(folder_name):
             file_path = os.path.join(folder_name, filename)
 
@@ -69,7 +71,6 @@ class VMTranslator:
 
 
 #TODO: Muokkaa codewriterin aritmeettisia lauseita siten että esim lt toimii x lt y kun nyt toimii y lt x. Eli ylempänä stackissa oleva viimeisenä.
-#TODO: Make this able to handle multi file translations. 
 def main():
     
     #args = sys.argv
