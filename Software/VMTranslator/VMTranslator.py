@@ -4,6 +4,8 @@ from CodeWriter import CodeWriter
 
 
 #TODO: Muokkaa codewriterin aritmeettisia lauseita siten että esim lt toimii x lt y kun nyt toimii y lt x. Eli ylempänä stackissa oleva viimeisenä.
+#TODO: Make this able to handle multi file translations. 
+#TODO: Make this to ignore comments and whitespace properly.
 def main():
     
     #args = sys.argv
@@ -19,7 +21,7 @@ def main():
 
     while parser.has_more_lines():
         parser.advance()
-        if parser.current_instruction[0] == '/':
+        if parser.current_instruction == '':
             continue
         type = parser.command_type()
         command = parser.arg1()

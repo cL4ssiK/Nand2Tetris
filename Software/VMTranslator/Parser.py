@@ -12,7 +12,6 @@ class Parser:
             for type in temp:
                     for item in temp[type]:
                         self.command_table[item] = type
-            
 
 
     def has_more_lines(self):
@@ -27,7 +26,7 @@ class Parser:
         return True
 
     def advance(self):
-        self.current_instruction = self.file.readline()
+        self.current_instruction = self.file.readline().split('//')[0].strip() # Removes comments and whitespace.
 
     def command_type(self):
         s=self.current_instruction.split()[0]
