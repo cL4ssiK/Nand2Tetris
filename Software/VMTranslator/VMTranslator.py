@@ -53,10 +53,18 @@ class VMTranslator:
 
         parser.close()
 
-    #TODO: Find sys.vm and translate it first.
+
     def translate_folder(self, folder_name):
         self.cw.write_bootstrap()
-        for filename in os.listdir(folder_name):
+        contents = os.listdir(folder_name)
+        
+        # Try to move Sys.vm file in the beginning so it will be translated first. 
+        try:
+            contents.insert(0, contents.pop(contents.index('Sys.vm')))
+        except ValueError:
+            print('No Sys.vm file present.')
+
+        for filename in contents:
             file_path = os.path.join(folder_name, filename)
 
             # Take out folders inside folders.
