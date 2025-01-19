@@ -3,7 +3,8 @@ import os
 from Parser import Parser
 from CodeWriter import CodeWriter
 
-
+#TODO: Add file name into labels! like filename.function_name.
+#TODO: Static variables!!
 class VMTranslator:
 
     def __init__(self, folder_name):
