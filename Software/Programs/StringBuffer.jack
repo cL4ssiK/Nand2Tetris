@@ -1,0 +1,65 @@
+
+/**
+Class for dynamic length strings.
+*/
+class StringBuffer {
+    field Array chars;   // Holds the characters
+    field int length;    // Current length of the string
+    field int capacity;  // Total allocated space
+
+    // Constructor: Creates a new dynamic string with an initial size
+    constructor StringBuffer new(int initialSize) {
+        let capacity = initialSize;
+        let length = 0;
+        let chars = Array.new(capacity); // Allocate memory for characters
+        return this;
+    }
+
+    // Method for disposing the object.
+    method void dispose() {
+        do chars.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // Method: Append a character to the string
+    method void appendChar(char c) {
+        if (length = capacity) {
+            do resize(); // Increase size if needed
+        }
+        let chars[length] = c; // Add the character
+        let length = length + 1;
+        return;
+    }
+
+    // Method: Resize the string (double capacity)
+    method void resize() {
+        var Array newChars;
+        var int i;
+
+        let newChars = Array.new(Math.multiply(capacity, 2)); // Double the size
+        let i = 0;
+
+        while (i < length) {  // Copy existing characters
+            let newChars[i] = chars[i];
+            let i = i + 1;
+        }
+
+        do chars.dispose(); // Free memory of an old array.
+        let chars = newChars;  // Replace old array with the new one
+        let capacity = Math.multiply(capacity, 2);  // Update capacity
+        return;
+    }
+
+    // Method: Print the string
+    method void print() {
+        var int i;
+        let i = 0;
+        while (i < length) {
+            do Output.printChar(chars[i]);
+            let i = i + 1;
+        }
+        do Output.println();
+        return;
+    }
+}

@@ -1,0 +1,29 @@
+class Main {
+    function void main() {
+        var char key;
+        var String text;
+        var int length;
+        var int line_number;
+
+        let text = String.new(50); // Create a string with max length 50
+        let length = 0; // Track current length of text
+        let line_number = 0;
+
+        while (true) {
+            let key = Keyboard.readChar(); // Wait for a key press
+
+            if (key = 129) { // If backspace is pressed
+                if (length > 0) { // Ensure there's something to erase
+                    do text.eraseLastChar();
+                    let length = length - 1;
+                    do Output.printChar(32); // Print a space to "erase" the character
+                    do Output.moveCursor(line_number, length);
+                }
+            } else {
+                do text.appendChar(key);
+                let length = length + 1;
+            }
+        }
+        return;
+    }
+}

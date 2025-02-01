@@ -1,0 +1,38 @@
+
+
+class TextRow {
+    field StringBuffer text;
+    field TextRow next_row;
+    field TextRow previous_row;
+
+    constructor TextRow new() {
+        let text = StringBuffer.new(5);
+        let next_row = null;
+        let previous_row = null;
+        return this;
+    }
+
+    method void dispose() {
+        do text.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void setNextRow(TextRow nr) {
+        let next_row = nr;
+        return;
+    }
+
+     method void setPreviousRow(TextRow pr) {
+        let previous_row = pr;
+        return;
+    }
+
+    method TextRow getNextRow() {
+        return next_row;
+    }
+
+    method TextRow getPreviousRow() {
+        return previous_row;
+    }
+}

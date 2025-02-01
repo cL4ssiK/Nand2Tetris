@@ -1,0 +1,80 @@
+
+/**
+Class that handles entire text. 
+Implementation ideas:
+Every row is their own object.
+The buffer is linked list where every row points to next row.
+**/
+class TextBuffer {
+    field int row;
+    field int column;
+    field int total_rows;
+    field TextRow first_row;
+    field TextRow current_row;
+
+    constructor TextBuffer new() {
+        let row = 0;
+        let column = 0;
+        let total_rows = 1;
+        let first_row = TextRow.new();
+        let current_row = first_row;
+        return this;
+    }
+
+    method void dispose() {
+
+        let current_row = first_row.getPreviousRow();
+        do current_row.setNextRow(null); // Set the last row next to null so disposeloop knows to stop.
+
+        while(~(first_row = null)) {
+            let current_row = first_row;
+            let first_row = first_row.getNextRow();
+            do current_row.dispose();     
+        }
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /**
+    Method: Adds character to current cursor position.
+    Parameters:
+            c: Character that is added.
+    */
+    method void writeCharacter(int c) {
+        return;
+    }
+
+    /**
+    Method: Removes character from current cursor position.
+    Parameters:
+    */
+    method void removeCharacter() {
+        return;
+    }
+
+    /**
+    Method: Creates new row beginning from current cursor position.
+    Parameters:
+    */
+    method void newRow() {
+        return;
+    }
+
+    /**
+    Method: Removes current row.
+    Parameters:
+    */
+    method void removeRow() {
+        return;
+    }
+
+    /**
+    Method: Update cursor position when cursor is only moved.
+    Parameters:
+            col: New index for column.
+            r  : New index for row.  
+    */
+    method void updateCursorPosition(int col, int r) {
+        return;
+    }
+}

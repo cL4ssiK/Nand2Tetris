@@ -1,0 +1,60 @@
+function Main.main 4
+    push constant 32
+    call Output.printChar 1
+    pop temp 0
+    push constant 50
+    call String.new 1
+    pop local 1
+    push constant 0
+    pop local 2
+    push constant 0
+    pop local 3
+label Main_0
+    push constant 1
+    neg
+    not
+    if-goto Main_1
+    call Keyboard.readChar 0
+    pop local 0
+    push local 0
+    push constant 129
+    eq
+    not
+    if-goto Main_3
+    push local 2
+    push constant 0
+    gt
+    not
+    if-goto Main_5
+    push local 1
+    call String.eraseLastChar 1
+    pop temp 0
+    push local 2
+    push constant 1
+    sub
+    pop local 2
+    push constant 32
+    call Output.printChar 1
+    pop temp 0
+    push local 3
+    push local 2
+    call Output.moveCursor 2
+    pop temp 0
+    goto Main_4
+label Main_5
+label Main_4
+    goto Main_2
+label Main_3
+    push local 1
+    push local 0
+    call String.appendChar 2
+    pop temp 0
+    push local 2
+    push constant 1
+    add
+    pop local 2
+label Main_2
+    goto Main_0
+label Main_1
+    push constant 0
+    return

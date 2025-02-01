@@ -83,7 +83,7 @@ class VMTranslator:
 def main():
     
     #args = sys.argv
-    args = ['testFolderTranslation']
+    args = ['test.vm']
     if len(args) != 1:
         print("Invalid amount of arguments!")
         sys.exit(1)
