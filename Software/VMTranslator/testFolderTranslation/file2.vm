@@ -1,1 +1,5 @@
 add // comment after 1 liner
+function file2.Main 1
+push argument 0
+pop static 0
+return

@@ -43,6 +43,8 @@ class CodeWriter:
     def write_push_pop(self, command, segment, index):
 
         base_address = self.segment_table.get(segment)
+        if segment == 'static':
+            base_address = self.filename + '.' + base_address
         asm = ''
         
         if base_address is not None:
@@ -125,6 +127,12 @@ class CodeWriter:
     def write_bootstrap(self):
         self.out.write('@256\nD=A\n@SP\nM=D\n') 
         self.write_goto('sys.init')
+
+    
+    def update_filename(self, directory):
+        temp = directory.rsplit('\\')
+        self.filename = temp[len(temp)-1].split('.')[0]
+        
 
 
 cw = CodeWriter('opf.asm')

@@ -5,7 +5,7 @@ A=M
 M=D
 @SP
 M=M+1
-@Increment$ret.0
+@test.Increment$ret.0
 D=A
 @SP
 A=M
@@ -54,9 +54,9 @@ M=D
 D=M
 @LCL
 M=D
-@Increment
+@test.Increment
 0;JMP
-(Increment$ret.0)
+(test.Increment$ret.0)
 @TEMP
 D=M
 @0
@@ -72,7 +72,7 @@ A=M
 M=D
 @SP
 M=M+1
-(Increment)
+(test.Increment)
 @ARG
 D=M
 @0
