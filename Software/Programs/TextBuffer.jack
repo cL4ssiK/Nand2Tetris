@@ -24,7 +24,7 @@ class TextBuffer {
     method void dispose() {
 
         let current_row = first_row.getPreviousRow();
-        do current_row.setNextRow(null); // Set the last row next to null so disposeloop knows to stop.
+        do current_row.setNextRow(null); // Set the last row next to null so dispose loop knows to stop.
 
         while(~(first_row = null)) {
             let current_row = first_row;
@@ -40,7 +40,7 @@ class TextBuffer {
     Parameters:
             c: Character that is added.
     */
-    method void writeCharacter(int c) {
+    method void writeCharacter(char c) {
         return;
     }
 
