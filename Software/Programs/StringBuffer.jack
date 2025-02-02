@@ -22,13 +22,73 @@ class StringBuffer {
         return;
     }
 
-    // Method: Append a character to the string
-    method void appendChar(char c) {
+
+    //TODO: Handle illegal indexes.
+    /** 
+    Method: Append a character to the string. Character at index is overwritten.
+    Parameters:
+            c: Character that is appended.
+            index: Position where character is added.
+    */
+    method void appendChar(char c, int index) {
+        var int i;
+        
         if (length = capacity) {
             do resize(); // Increase size if needed
         }
-        let chars[length] = c; // Add the character
+        let i = length;
+        while (~(i = index - 1)) {
+            let chars[i + 1] = chars[i];
+            let i = i - 1; 
+        }
+        let chars[index] = c; // Add the character
         let length = length + 1;
+        return;
+    }
+
+    /** 
+    Method: Append a string to the string. Character at index is overwritten.
+    Parameters:
+            c: String that is appended.
+            index: Position where string is added.
+    */
+    method void appendString(String s, int index) {
+        var int i;
+        var int j;
+        var int lenS;
+        let lenS = s.length();
+
+        if (length = capacity) {
+            do resize(); // Increase size if needed
+        }
+
+        let i = length;
+        while (~(i = index - 1)) {
+            let chars[i + lenS] = chars[i];
+            let i = i - 1; 
+        }
+
+        let i = index;
+        let j = 0;
+        while (i < index + lenS) {
+            let chars[i] = s.charAt(j);
+        }
+
+        return;
+    }
+
+    /** 
+    Method: Remove a character from the string.
+    Parameters:
+            index: Position where character is removed.
+    */
+    method void removeChar(int index) {
+        var int i;
+        let i = index;
+        while(i < length) {
+            let chars[i] = chars[i + 1];
+            let i = i + 1;
+        }
         return;
     }
 
