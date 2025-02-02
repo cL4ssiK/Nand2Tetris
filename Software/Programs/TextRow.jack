@@ -35,4 +35,9 @@ class TextRow {
     method TextRow getPreviousRow() {
         return previous_row;
     }
+
+    method void print() {
+        do text.print();
+        return;
+    }
 }
