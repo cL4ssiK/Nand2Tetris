@@ -6,12 +6,18 @@ Every row is their own object.
 The buffer is linked list where every row points to next row.
 **/
 class TextBuffer {
+
     field int row;
     field int column;
     field int total_rows;
     field TextRow first_row;
     field TextRow current_row;
 
+
+    /**
+    Constructor: Creates new textbuffer object. 
+    Parameters:
+    */
     constructor TextBuffer new() {
         let row = 0;
         let column = 0;
@@ -21,6 +27,11 @@ class TextBuffer {
         return this;
     }
 
+
+    /**
+    Method: Disposes the object.
+    Parameters:
+    */
     method void dispose() {
 
         let current_row = first_row.getPreviousRow();
@@ -35,6 +46,7 @@ class TextBuffer {
         return;
     }
 
+
     /**
     Method: Adds character to current cursor position.
     Parameters:
@@ -44,6 +56,7 @@ class TextBuffer {
         return;
     }
 
+
     /**
     Method: Removes character from current cursor position.
     Parameters:
@@ -51,6 +64,7 @@ class TextBuffer {
     method void removeCharacter() {
         return;
     }
+
 
     /**
     Method: Creates new row beginning from current cursor position.
@@ -60,6 +74,7 @@ class TextBuffer {
         return;
     }
 
+
     /**
     Method: Removes current row.
     Parameters:
@@ -67,6 +82,7 @@ class TextBuffer {
     method void removeRow() {
         return;
     }
+
 
     /**
     Method: Update cursor position when cursor is only moved.

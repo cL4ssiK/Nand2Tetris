@@ -1,10 +1,18 @@
 
-
+/**
+Object to create row of text that can be used as element in linked list.
+*/
 class TextRow {
+    
     field StringBuffer text;
     field TextRow next_row;
     field TextRow previous_row;
 
+
+    /**
+    Constructor: Constructs new row object that can be used in linked list.
+    Parameters:
+    */
     constructor TextRow new() {
         let text = StringBuffer.new(5);
         let next_row = null;
@@ -12,30 +20,62 @@ class TextRow {
         return this;
     }
 
+
+    /**
+    Method: Disposes the object. Does not touch next or previous object.
+    Parameters:
+    */
     method void dispose() {
         do text.dispose();
         do Memory.deAlloc(this);
         return;
     }
 
+
+    /**
+    Method: Sets next_row to point the next object.
+    Parameters:
+            nr: Next TextRow object.
+    */
     method void setNextRow(TextRow nr) {
         let next_row = nr;
         return;
     }
 
+
+    /**
+    Method: Sets previous_row to point the previous object.
+    Parameters:
+            pr: Previous TextRow object.
+    */
      method void setPreviousRow(TextRow pr) {
         let previous_row = pr;
         return;
     }
 
+
+    /**
+    Method: Returns pointer to next TextRow object.
+    Parameters:
+    */
     method TextRow getNextRow() {
         return next_row;
     }
 
+
+    /**
+    Method: Returns pointer to previous TextRow object.
+    Parameters:
+    */
     method TextRow getPreviousRow() {
         return previous_row;
     }
 
+
+    /**
+    Method: Prints the object.
+    Parameters:
+    */
     method void print() {
         do text.print();
         return;
