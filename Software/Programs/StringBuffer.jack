@@ -3,11 +3,17 @@
 Class for dynamic length strings.
 */
 class StringBuffer {
+    
     field Array chars;   // Holds the characters
     field int length;    // Current length of the string
     field int capacity;  // Total allocated space
 
-    // Constructor: Creates a new dynamic string with an initial size
+
+    /**
+    Constructor: Creates new dynamic string object. 
+    Parameters:
+            initialSize: Maxium size of stringbuffer as default.
+    */
     constructor StringBuffer new(int initialSize) {
         let capacity = initialSize;
         let length = 0;
@@ -15,7 +21,11 @@ class StringBuffer {
         return this;
     }
 
-    // Method for disposing the object.
+
+    /**
+    Method: Disposes the object.
+    Parameters:
+    */
     method void dispose() {
         do chars.dispose();
         do Memory.deAlloc(this);
@@ -45,6 +55,7 @@ class StringBuffer {
         let length = length + 1;
         return;
     }
+
 
     /** 
     Method: Append a string to the string. Character at index is overwritten.
@@ -77,6 +88,39 @@ class StringBuffer {
         return;
     }
 
+
+    /** 
+    Method: Append a stringbuffer to the string. Character at index is overwritten.
+    Parameters:
+            c: StringBuffer that is appended.
+            index: Position where stringbuffer is added.
+    */
+    method void appendSb(StringBuffer s, int index) {
+        var int i;
+        var int j;
+        var int lenS;
+        let lenS = s.length();
+
+        if (length = capacity) {
+            do resize(); // Increase size if needed
+        }
+
+        let i = length;
+        while (~(i = index - 1)) {
+            let chars[i + lenS] = chars[i];
+            let i = i - 1; 
+        }
+
+        let i = index;
+        let j = 0;
+        while (i < index + lenS) {
+            let chars[i] = s.charAt(j);
+        }
+
+        return;
+    }
+
+
     /** 
     Method: Remove a character from the string.
     Parameters:
@@ -92,7 +136,11 @@ class StringBuffer {
         return;
     }
 
-    // Method: Resize the string (double capacity)
+
+    /**
+    Method: Resize the string to double capacity.
+    Parameters:
+    */
     method void resize() {
         var Array newChars;
         var int i;
@@ -111,7 +159,30 @@ class StringBuffer {
         return;
     }
 
-    // Method: Print the string
+
+    /**
+    Method: Returns character at current index.
+    Parameters:
+            index: Position of returned character.
+    */
+    method char charAt(int index) {
+        return chars[index];
+    }
+
+
+    /**
+    Method: Returns length of the string.
+    Parameters:
+    */
+    method int length() {
+        return length;
+    }
+
+
+    /**
+    Method: Prints the string inside the StringBuffer.
+    Parameters:
+    */
     method void print() {
         var int i;
         let i = 0;
