@@ -73,6 +73,49 @@ class TextRow {
 
 
     /**
+    Method: Returns text content of the row.
+    Parameters:
+    */
+    method StringBuffer getContents() {
+        return text;
+    }
+
+
+    /** 
+    Method: Append a character to the row. Character at index is overwritten.
+    Parameters:
+            c: Character that is appended.
+            index: Position where character is added.
+    */
+    method void appendChar(char c, int index) {
+        do text.appendChar(c, index);
+        return;
+    }
+
+
+    /** 
+    Method: Remove a character from the row.
+    Parameters:
+            index: Position where character is removed.
+    */
+    method void removeChar(int index) {
+        do text.removeChar(index);
+        return;
+    }
+
+
+    /** 
+    Method: Append a row to the row. Character at index is overwritten.
+    Parameters:
+            r: Row that is appended.
+    */
+    method void combineRows(TextRow r) {
+        do text.appendSb(r.getContents(), text.length());
+        return;
+    }
+
+
+    /**
     Method: Prints the object.
     Parameters:
     */
