@@ -68,29 +68,32 @@ class StringBuffer {
         var int j;
         var int lenS;
         let lenS = s.length();
-
-        if (length = capacity) {
+        if (length + lenS = capacity) {
             do resize(); // Increase size if needed
         }
 
-        let i = length;
-        while (~(i = index - 1)) {
+        let i = length - 1;
+        while (~(i < (index - 1))) {
             let chars[i + lenS] = chars[i];
             let i = i - 1; 
         }
 
         let i = index;
+
         let j = 0;
-        while (i < index + lenS) {
+        while (i < (index + lenS)) {
             let chars[i] = s.charAt(j);
+            let j = j + 1;
+            let i = i + 1;
         }
+        let length = length + lenS;
 
         return;
     }
 
-
+    //TODO: Appended sb might be over the length of resized array as well. add minium length increase argument.
     /** 
-    Method: Append a stringbuffer to the string. Character at index is overwritten.
+    Method: Append a stringbuffer to the string. Character at index is not overwritten.
     Parameters:
             c: StringBuffer that is appended.
             index: Position where stringbuffer is added.
@@ -100,22 +103,25 @@ class StringBuffer {
         var int j;
         var int lenS;
         let lenS = s.length();
-
-        if (length = capacity) {
+        if (length + lenS = capacity) {
             do resize(); // Increase size if needed
         }
 
-        let i = length;
-        while (~(i = index - 1)) {
+        let i = length - 1;
+        while (~(i < (index - 1))) {
             let chars[i + lenS] = chars[i];
             let i = i - 1; 
         }
 
         let i = index;
+
         let j = 0;
-        while (i < index + lenS) {
+        while (i < (index + lenS)) {
             let chars[i] = s.charAt(j);
+            let j = j + 1;
+            let i = i + 1;
         }
+        let length = length + lenS;
 
         return;
     }
@@ -192,5 +198,55 @@ class StringBuffer {
         }
         do Output.println();
         return;
+    }
+
+
+    /**
+    Method: Return characters. For testing purposes only.
+    Parameters:
+    */
+    method Array getString() {
+        return chars;
+    }
+
+    
+    function boolean testStringBuffer() {
+        var boolean pass;
+        var StringBuffer sb;
+        var StringBuffer sb2;
+        var int i;
+
+        let i = 0;
+
+        let pass = true;
+
+
+        let sb = StringBuffer.new(5);
+        let sb2 = StringBuffer.new(5);
+        do sb2.appendChar(90,0);
+        do sb2.appendChar(89,1);
+        do sb2.appendChar(88,2);
+
+        do sb.appendChar(65,0);
+        
+        if (~(sb.charAt(0) = 65)) {
+            let pass = false;
+        }
+        do sb.print();
+
+        do sb.appendChar(66,1);
+        do sb.print();
+
+        do sb.appendChar(67,2);
+        do sb.print();
+
+        //do sb.removeChar(0);
+        //do sb.print();
+
+        do sb2.print();
+        do sb.appendSb(sb2, 1);
+        do sb.print();
+
+        return pass;
     }
 }
