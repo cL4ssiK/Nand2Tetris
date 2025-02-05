@@ -246,7 +246,9 @@ class StringBuffer {
         do sb2.print();
         do sb.appendSb(sb2, 1);
         do sb.print();
-
+        
+        do sb.dispose();
+        do sb2.dispose();
         return pass;
     }
 }
