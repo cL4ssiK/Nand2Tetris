@@ -118,6 +118,15 @@ class TextRow {
 
 
     /**
+    Method: Returns length of the row.
+    Parameters:
+    */
+    method int length() {
+        return text.length();
+    }
+
+
+    /**
     Method: Prints the object.
     Parameters:
     */
