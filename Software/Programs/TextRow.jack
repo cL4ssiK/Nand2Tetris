@@ -105,12 +105,14 @@ class TextRow {
 
 
     /** 
-    Method: Append a row to the row. Character at index is overwritten.
+    Method: Append a row to the row. Character at index is not overwritten.
     Parameters:
             r: Row that is appended.
     */
     method void combineRows(TextRow r) {
         do text.appendSb(r.getContents(), text.length());
+        let next_row = r.getNextRow();
+        do r.dispose();
         return;
     }
 
