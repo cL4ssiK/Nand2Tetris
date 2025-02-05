@@ -19,8 +19,8 @@ class TextBuffer {
     Parameters:
     */
     constructor TextBuffer new() {
-        let row = 0;
-        let column = 0;
+        let row = 0;        // Cursor row.
+        let column = 0;     // Cursor position on a row.
         let total_rows = 1;
         let first_row = TextRow.new();
         let current_row = first_row;
@@ -53,6 +53,8 @@ class TextBuffer {
             c: Character that is added.
     */
     method void writeCharacter(char c) {
+        do current_row.appendChar(c, column);
+        let column = column + 1; // Move cursor after writing.
         return;
     }
 
@@ -62,6 +64,7 @@ class TextBuffer {
     Parameters:
     */
     method void removeCharacter() {
+        do current_row.removeChar(column);
         return;
     }
 
@@ -71,6 +74,17 @@ class TextBuffer {
     Parameters:
     */
     method void newRow() {
+        var TextRow new_row; 
+        let new_row = TextRow.new();
+
+        do new_row.setNextRow(current_row.getNextRow());
+        do new_row.setPreviousRow(current_row);
+
+        do current_row.setNextRow(new_row);
+
+        let current_row = new_row; // Set current row to new row. Hopefully xD
+        let total_rows = total_rows + 1;
+        //set cursor position here.
         return;
     }
 
@@ -80,6 +94,10 @@ class TextBuffer {
     Parameters:
     */
     method void removeRow() {
+        var TextRow r;
+        let r = current_row.getPreviousRow();
+        do r.setNextRow(current_row.getNextRow());
+        //set cursor position here.
         return;
     }
 
