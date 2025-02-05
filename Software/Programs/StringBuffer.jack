@@ -214,41 +214,49 @@ class StringBuffer {
         var boolean pass;
         var StringBuffer sb;
         var StringBuffer sb2;
-        var int i;
-
-        let i = 0;
+        var StringBuffer sb3;
 
         let pass = true;
 
-
         let sb = StringBuffer.new(5);
+        // Test appending char into the beginning.
+        do sb.appendChar(65,0);
+        if (~(sb.charAt(0) = 65)) {
+            let pass = false;
+        }
+        do sb.appendChar(66,1);
+        do sb.appendChar(67,2);
+        do sb.print();
+        
         let sb2 = StringBuffer.new(5);
         do sb2.appendChar(90,0);
         do sb2.appendChar(89,1);
         do sb2.appendChar(88,2);
+        do sb2.print();
+        // Test appending character on top of another. doesn't work yet.
+        //do sb2.appendChar(67,1);
+        //do sb2.print();
 
-        do sb.appendChar(65,0);
-        
-        if (~(sb.charAt(0) = 65)) {
+        let sb3 = StringBuffer.new(5);
+        // Test appending string literal.
+        do sb3.appendString("kokeilu", 0);
+        do sb3.print();        
+
+        // Test removing character.
+        do sb3.removeChar(0);
+        if ((~(sb3.charAt(0) = 112)) & (~(sb3.length() = 6))) {
             let pass = false;
         }
+        do sb3.print();
+
+        // Test appending stringbuffer.
         do sb.print();
-
-        do sb.appendChar(66,1);
-        do sb.print();
-
-        do sb.appendChar(67,2);
-        do sb.print();
-
-        //do sb.removeChar(0);
-        //do sb.print();
-
-        do sb2.print();
         do sb.appendSb(sb2, 1);
         do sb.print();
-        
+
         do sb.dispose();
         do sb2.dispose();
+        do sb3.dispose();
         return pass;
     }
 }
