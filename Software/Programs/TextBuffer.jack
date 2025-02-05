@@ -65,6 +65,7 @@ class TextBuffer {
     */
     method void removeCharacter() {
         do current_row.removeChar(column);
+        let column = column - 1; // Move cursor after writing.
         return;
     }
 
@@ -76,7 +77,7 @@ class TextBuffer {
     method void newRow() {
         var TextRow new_row; 
         let new_row = TextRow.new();
-
+        
         do new_row.setNextRow(current_row.getNextRow());
         do new_row.setPreviousRow(current_row);
 
@@ -97,7 +98,12 @@ class TextBuffer {
         var TextRow r;
         let r = current_row.getPreviousRow();
         do r.setNextRow(current_row.getNextRow());
+        let current_row = r;
+        
+        let total_rows = total_rows - 1;
         //set cursor position here.
+        let row = row - 1;              // Set cursor to previous row.
+        let column = r.length() + 1;    // Set cursor to end of the previous row.
         return;
     }
 
@@ -109,6 +115,8 @@ class TextBuffer {
             r  : New index for row.  
     */
     method void updateCursorPosition(int col, int r) {
+        let column = col;
+        let row = r;
         return;
     }
 }
