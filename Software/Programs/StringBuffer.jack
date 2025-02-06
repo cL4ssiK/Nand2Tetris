@@ -139,6 +139,7 @@ class StringBuffer {
             let chars[i] = chars[i + 1];
             let i = i + 1;
         }
+        let length = length - 1;
         return;
     }
 
