@@ -137,7 +137,7 @@ class TextRow {
 
 
     /**
-    Test function for TextRow class.
+    Function: Test function for TextRow class.
     */
     function boolean testTextRow() {
         var boolean pass;

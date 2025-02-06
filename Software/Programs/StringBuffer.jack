@@ -210,6 +210,9 @@ class StringBuffer {
     }
 
     
+    /**
+    Function: Test function for StringBuffer class.
+    */
     function boolean testStringBuffer() {
         var boolean pass;
         var StringBuffer sb;
