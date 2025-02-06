@@ -64,8 +64,8 @@ class TextBuffer {
     Parameters:
     */
     method void removeCharacter() {
+        let column = column - 1; // Move cursor back one character.
         do current_row.removeChar(column);
-        let column = column - 1; // Move cursor after writing.
         return;
     }
 
@@ -85,7 +85,9 @@ class TextBuffer {
 
         let current_row = new_row; // Set current row to new row. Hopefully xD
         let total_rows = total_rows + 1;
-        //set cursor position here.
+        // Update cursor position.
+        let row = row + 1;
+        let column = 0;
         return;
     }
 
@@ -97,13 +99,14 @@ class TextBuffer {
     method void removeRow() {
         var TextRow r;
         let r = current_row.getPreviousRow();
-        do r.setNextRow(current_row.getNextRow());
+        do r.combineRows(current_row);
+        //do r.setNextRow(current_row.getNextRow());
         let current_row = r;
         
         let total_rows = total_rows - 1;
         //set cursor position here.
         let row = row - 1;              // Set cursor to previous row.
-        let column = r.length() + 1;    // Set cursor to end of the previous row.
+        let column = r.length();    // Set cursor to end of the previous row.
         return;
     }
 
@@ -122,12 +125,112 @@ class TextBuffer {
 
 
     /**
+    Method: Update cursor position when cursor is moved.
+    Parameters:  
+            direction: Character that defines direction of cursor movement.
+                        Can have values between 130-133.
+    */
+    method void moveCursor(int direction) {
+        // Move left
+        if (direction = 130) {
+            if (column > 0) {
+                let column = column - 1;
+            }
+        }
+        // Move right
+        if (direction = 132) {
+            if (column < current_row.length()) {
+                let column = column + 1;
+            }
+        }
+        // Move up
+        if (direction = 131) {
+            if (row > 0) {
+                let row = row - 1;
+                let current_row = current_row.getPreviousRow();
+            }
+            if (column > current_row.length()) {
+                let column = current_row.length();
+            }
+        }
+        // Move down
+        if (direction = 133) {
+            if (row < total_rows) {
+                let row = row + 1;
+                let current_row = current_row.getNextRow();
+            }
+            if (column > current_row.length()) {
+                let column = current_row.length();
+            }
+        }
+        return;
+    }
+
+
+    /**
+    Method: Prints current row.
+    Parameters:
+    */
+    method void printCurrentRow() {
+        do current_row.print();
+        return;
+    }
+
+    //TODO: Implement method that prints entire TextBuffer.
+    /**
+    Method: Prints entire text row by row.
+    Parameters:
+    */
+    method void printContents() {
+        var TextRow temp;
+        let temp = first_row;
+        while(~(temp.getNextRow() = null)) {
+            do temp.print();
+            let temp = temp.getNextRow();
+        }
+        
+        return;
+    }
+
+
+    //TODO: More tests, boolean value correction.
+    /**
     Function: Test function for TextBuffer class.
     */
     function boolean testTextBuffer() {
         var boolean pass;
+        var TextBuffer file;
 
         let pass = true;
+        let file = TextBuffer.new();
+
+        // Test writing single character to text.
+        do file.writeCharacter(66);
+        do file.printCurrentRow();
+
+        do file.writeCharacter(66);
+        do file.writeCharacter(67);
+        do file.writeCharacter(66);
+        do file.printCurrentRow();
+
+        // Test removing character.
+        do file.removeCharacter();
+        do file.printCurrentRow();
+        
+        // Test starting new row.
+        do file.newRow();
+        do file.writeCharacter(69);
+        do file.printCurrentRow();
+
+        // Test removing row.
+        do file.removeRow();
+        do file.printCurrentRow();
+
+        // Test moving cursor and writing to it.
+        do file.moveCursor(130);
+        do file.moveCursor(130);
+        do file.writeCharacter(89);
+        do file.printCurrentRow();
 
         return true;
     }
