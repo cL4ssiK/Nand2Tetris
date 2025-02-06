@@ -77,7 +77,7 @@ class TextBuffer {
     method void newRow() {
         var TextRow new_row; 
         let new_row = TextRow.new();
-        
+
         do new_row.setNextRow(current_row.getNextRow());
         do new_row.setPreviousRow(current_row);
 
@@ -118,5 +118,17 @@ class TextBuffer {
         let column = col;
         let row = r;
         return;
+    }
+
+
+    /**
+    Function: Test function for TextBuffer class.
+    */
+    function boolean testTextBuffer() {
+        var boolean pass;
+
+        let pass = true;
+
+        return true;
     }
 }
