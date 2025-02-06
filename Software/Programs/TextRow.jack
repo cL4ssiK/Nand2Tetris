@@ -134,4 +134,61 @@ class TextRow {
         do text.print();
         return;
     }
+
+
+    /**
+    Test function for TextRow class.
+    */
+    function boolean testTextRow() {
+        var boolean pass;
+        var TextRow r1;
+        var TextRow r2;
+        var TextRow r3;
+        var TextRow temp;
+
+        let pass = true;
+        let r1 = TextRow.new();
+        let r2 = TextRow.new();
+        let r3 = TextRow.new();   
+        
+        do r1.appendChar(66, 0);
+        do r1.appendChar(66, 1);
+        do r1.appendChar(66, 2);
+        do r1.appendChar(66, 3);
+        do r1.appendChar(66, 4);
+        do r1.print();
+        
+        do r2.appendChar(67, 0);
+        do r2.appendChar(67, 1);
+        do r2.appendChar(67, 2);
+        do r2.appendChar(67, 3);
+        do r2.appendChar(67, 4);
+        do r2.print();
+
+        do r3.appendChar(68, 0);
+        do r3.appendChar(68, 1);
+        do r3.appendChar(69, 2);
+        do r3.appendChar(68, 3);
+        do r3.appendChar(68, 4);
+        do r3.print();
+
+        // Test removing character from row.
+        do r3.removeChar(2);
+        do r3.print();
+
+        // Test if adding next and previous rows work.
+        //do r2.setPreviousRow(r1);
+        do r2.setNextRow(r3);
+        let temp = r2.getNextRow();
+        do temp.print();
+
+         // Test combining two rows.
+        do r1.combineRows(r2);
+        do r1.print();
+
+        do r1.dispose();
+        do r3.dispose();
+        
+        return pass;
+    }
 }
