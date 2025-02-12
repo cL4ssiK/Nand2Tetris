@@ -1,4 +1,3 @@
-
 /**
 Class that handles entire text. 
 Implementation ideas:
@@ -61,9 +60,14 @@ class TextBuffer {
 
     /**
     Method: Removes character from current cursor position.
+            If cursor is at beginning of the row, appends the row to the previous row.
     Parameters:
     */
     method void removeCharacter() {
+        if (column = 0) {
+            do removeRow();
+            return;
+        }
         let column = column - 1; // Move cursor back one character.
         do current_row.removeChar(column);
         return;
@@ -190,6 +194,24 @@ class TextBuffer {
         }
         
         return;
+    }
+
+
+    /**
+    Method: Returns current row of the cursor.
+    Parameters:
+    */
+    method int cursorRow() {
+        return row;
+    }
+
+
+    /**
+    Method: Returns current column of the cursor.
+    Parameters:
+    */
+    method int cursorColumn() {
+        return column;
     }
 
 
