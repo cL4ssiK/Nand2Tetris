@@ -1,0 +1,140 @@
+/**
+Class and functionality of text editor.
+Reads keyboard input and prints to screen.
+*/
+class TextEditor {
+    
+    field TextBuffer open_file;
+
+    /**
+    Constructor: Initializes new instance of text editor.
+    Parameters:
+    */
+    constructor TextEditor new() {
+        let open_file = TextBuffer.new();
+        return this;
+    }
+
+
+    /**
+    Method: Disposes the instance of the editor.
+    Parameters:
+    */
+    method void dispose() {
+        do open_file.dispose();
+        return;
+    }
+
+
+    /**
+    Method: Moves the cursor.
+    Parameters:
+    */
+    method void moveCursor(char key) {
+        do open_file.moveCursor(key);
+        return;
+    }
+
+
+    /**
+    Method: Creates new line.
+    Parameters:
+    */
+    method void newRow() {
+        do open_file.newRow();
+        do Output.println();
+        return;
+    }
+
+
+    /**
+    Method: Removes character if there is character to remove, otherwise removes a row.
+    Parameters:
+    */
+    method void removeCharacter() {
+        do open_file.removeCharacter();
+        return;
+    }
+
+
+    /**
+    Method: Removes character if there is character to remove, otherwise removes a row.
+    Parameters:
+    */
+    method void writeCharacter(char c) {
+        do open_file.writeCharacter(c);
+        return;
+    }
+
+
+    /**
+    Function: Contains main logic for the program. Like main in java program.
+    Parameters:
+    */
+    function void programLoop() {
+        var TextEditor editor;
+        var char key;
+        let editor = TextEditor.new();
+        while(true) {
+            do editor.drawCursor(true);
+            let key = TextEditor.readKeyboard();
+
+            if ((key > 129) & (key < 134)) {
+                do editor.drawCursor(false);
+                do editor.moveCursor(key);
+            }
+
+            if (key = 128) {
+                do editor.drawCursor(false);
+                do editor.newRow();
+            }
+
+            if (key = 129) {
+                do editor.drawCursor(false);
+                do editor.removeCharacter();
+            }
+
+            if ((key > 0) & (key < 128)) {
+                do editor.drawCursor(false);
+                do editor.writeCharacter(key);
+                do Output.printChar(key);
+            }
+        }
+        return;
+    }
+
+
+    /**
+    Method: Draws blinking cursor on the screen.'
+    Parameters:
+            color: True == black, False == white.
+    */
+    method void drawCursor(boolean color) {
+        // Top left corner is col*5+1, row*5
+        // Font is of size 8x16px
+        var int topLX;
+        var int topLY;
+        let topLX = Math.multiply(open_file.cursorColumn(), 8) - 2;
+        if (topLX < 0) {let topLX = 0;}
+        let topLY = Math.multiply(open_file.cursorRow(), 10);
+        // Bottom right corner: col*5+2, row*5+10
+        do Screen.setColor(color);
+        do Screen.drawRectangle(topLX, topLY, topLX + 1, topLY + 10); // position needs to change.
+        do Screen.setColor(true); // Set color back to black.
+        return;
+    }
+
+
+    /**
+    Function: "Good" way to implement listener for keypress. Maybe interrupt should be preferred irl, because execution is stuck here.
+    Parameters:
+    */
+    function char readKeyboard() {
+           var char key;
+           let key = 0;
+           while(key = 0) {
+                  let key = Keyboard.keyPressed();
+           }
+           return key;
+    }
+}
